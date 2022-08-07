@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PassengerRepositoryInterface extends JpaRepository<Passenger, String> {
 
-    List<Passenger> findByFirstnameAndLastname(String firstName, String lastName);
+    List<Passenger> findByFirstNameAndLastName(String firstName, String lastName);
 }

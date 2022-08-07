@@ -3,9 +3,15 @@ package com.springboot.airline.ecommerce.service;
 
 import com.springboot.airline.ecommerce.exception.PassengerDuplicationException;
 import com.springboot.airline.ecommerce.exception.ResourceNotFoundException;
-import com.springboot.airline.ecommerce.model.*;
+import com.springboot.airline.ecommerce.model.Passenger;
+import com.springboot.airline.ecommerce.model.PassengerCreationRequestDTO;
+import com.springboot.airline.ecommerce.model.PassengerCreationResponseDTO;
+import com.springboot.airline.ecommerce.model.PassengerDetailRequestDTO;
+import com.springboot.airline.ecommerce.model.PassengerDetailResponseDTO;
+import com.springboot.airline.ecommerce.model.ErrorList;
 import com.springboot.airline.ecommerce.repo.PassengerRepositoryInterface;
 import org.dozer.Mapper;
+import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +21,10 @@ import java.util.*;
 @Service
 public class PassengerService implements PassengerServiceInterface {
 
-    @Autowired
-    protected Passenger passenger;
+
 
     @Autowired
-    protected Mapper mapper;
-
-    @Autowired
-    protected PassengerRepositoryInterface passengerRepository;
+    private PassengerRepositoryInterface passengerRepository;
 
 
     /**
@@ -33,7 +35,7 @@ public class PassengerService implements PassengerServiceInterface {
      */
     @Override
     public PassengerCreationResponseDTO createNewPassenger(PassengerCreationRequestDTO passengerCreationRequest)  {
-
+        Mapper mapper = createMapper();
         final Passenger newPassenger = mapper.map(passengerCreationRequest, Passenger.class);
 
         if(fetchPassenger(newPassenger).size() > 0){
@@ -59,7 +61,7 @@ public class PassengerService implements PassengerServiceInterface {
      *         false: customer doesnot exists;
      */
     private List<Passenger> fetchPassenger(Passenger newPassenger) {
-        return  passengerRepository.findByFirstnameAndLastname(newPassenger.getFirstName(), newPassenger.getLastName());
+        return  passengerRepository.findByFirstNameAndLastName(newPassenger.getFirstName(), newPassenger.getLastName());
     }
 
     /**
@@ -71,7 +73,7 @@ public class PassengerService implements PassengerServiceInterface {
      */
     @Override
     public PassengerDetailResponseDTO changePassengerDetails(PassengerDetailRequestDTO passengerDetailRequest, String passengerId) {
-
+        Mapper mapper =  createMapper();
        Passenger existingPassenger = passengerRepository.findById(passengerId).get();
 
        if(Objects.isNull(existingPassenger)){
@@ -95,6 +97,30 @@ public class PassengerService implements PassengerServiceInterface {
 
         return response;
 
+    }
+
+    private Mapper createMapper() {
+        return new Mapper() {
+            @Override
+            public <T> T map(Object source, Class<T> destinationClass) throws MappingException {
+                return null;
+            }
+
+            @Override
+            public void map(Object source, Object destination) throws MappingException {
+
+            }
+
+            @Override
+            public <T> T map(Object source, Class<T> destinationClass, String mapId) throws MappingException {
+                return null;
+            }
+
+            @Override
+            public void map(Object source, Object destination, String mapId) throws MappingException {
+
+            }
+        };
     }
 
     /**
