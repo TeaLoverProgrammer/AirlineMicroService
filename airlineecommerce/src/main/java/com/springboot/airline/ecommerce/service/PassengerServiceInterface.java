@@ -14,7 +14,7 @@ public interface PassengerServiceInterface {
      * @param passengerCreationRequest
      * @return PassengerCreationResponse
      */
-    PassengerCreationResponseDTO createNewPassenger(PassengerCreationRequestDTO passengerCreationRequest) throws Exception;
+    PassengerCreationResponseDTO createNewPassenger(PassengerCreationRequestDTO passengerCreationRequest);
 
 
     /**
