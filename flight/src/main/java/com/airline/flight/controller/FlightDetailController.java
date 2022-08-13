@@ -35,6 +35,13 @@ public class FlightDetailController {
         return flightDetailService.getFlightDetail(flightId);
     }
 
-
+    /**
+     * Insert flight details. Only for admin users
+     *
+     */
+    @PostMapping
+    void addFlight(@RequestBody final Flight flightDetail){
+        flightDetailService.insertFlightDetail(flightDetail);
+    }
 
 }

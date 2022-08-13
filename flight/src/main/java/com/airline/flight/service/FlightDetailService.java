@@ -40,5 +40,16 @@ public class FlightDetailService implements  FlightDetailServiceInterface{
         return flightDetail;
     }
 
+    /**
+     * Insert flight details
+     *
+     */
+    @Override
+    public void insertFlightDetail(Flight flightDetail) {
+        flightRepository.save(flightDetail);
+    }
+
+
+
 
 }

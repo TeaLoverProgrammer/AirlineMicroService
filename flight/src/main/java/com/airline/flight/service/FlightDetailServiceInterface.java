@@ -17,4 +17,12 @@ public interface FlightDetailServiceInterface {
      * @return
      */
     Flight getFlightDetail(String flightId);
+
+    /**
+     * Method to insert flight detail
+     *
+     * @return
+     */
+    void insertFlightDetail(Flight flightDetail);
+
 }
