@@ -1,2 +1,4 @@
-package com.airline.payment.model;public class Payment {
+package com.airline.payment.model;
+
+public class Payment {
 }
